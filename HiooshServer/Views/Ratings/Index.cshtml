@@ -1,0 +1,72 @@
+﻿@model IEnumerable<HiooshServer.Models.Rating>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="rating"> 
+    <h1>Ratings</h1>
+    <hr />
+    @{
+        if (ViewData["count"] == "0")
+        {
+            <h4>The app is not rated. You can add a rating by clicking the "Create New Rating" button.</h4>
+        }
+        else
+        {
+           <h4>The current average of the numerical rating is @ViewData["average"]</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-success">
+                        <th scope="col"> 
+                             @Html.DisplayNameFor(model => model.NumberRating)
+                        </th>
+                        <th scope="col"> 
+                             @Html.DisplayNameFor(model => model.StringRating)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th scope="col">
+                             @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+              <tbody>
+        @foreach (var item in Model) {
+            <tr class="table-success">
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StringRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm" role="button">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm" role="button">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary btn-sm" role="button">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+        }
+    }
+    <hr />
+    <p>
+        <a asp-action="Create" class="btn btn-primary" role="button">Create new rating</a> | 
+        <a asp-action="Search" class="btn btn-primary" role="button">Search page</a>
+    </p>
+    <p>
+        <label>Would you like to go back to the app?</label>
+        <a href="http://localhost:3000/">Click here</a>
+        <label>to go back to the app</label> 
+    </p>
+</div>
