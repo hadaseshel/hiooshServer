@@ -130,6 +130,9 @@ namespace HiooshServer.Controllers
 
                 Message message = new Message(id_of_last + 1, content, true, DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), "Text");
                 _contactsService.AddMessage(user, id, message);
+                Contact contact = _contactsService.GetContact(user, id);
+                contact.last = content;
+                contact.last = DateTime.Now.ToString("MM/dd/yyyy hh:mm tt");
                 return Created(string.Format("/api/contacts/{0}/messages/{1}", id, message.id), message);
             }
             // need to take care if is not 
